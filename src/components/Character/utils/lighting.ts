@@ -3,7 +3,7 @@ import { RGBELoader } from "three-stdlib";
 import { gsap } from "gsap";
 
 const setLighting = (scene: THREE.Scene) => {
-  const directionalLight = new THREE.DirectionalLight(0xc7a9ff, 1); // Debug: Force intensity to 1
+  const directionalLight = new THREE.DirectionalLight(0x00ff88, 1); // Debug: Force intensity to 1
   directionalLight.intensity = 1; // Debug: Force intensity to 1
   directionalLight.position.set(-0.47, -0.32, -1);
   directionalLight.castShadow = true;
@@ -13,7 +13,7 @@ const setLighting = (scene: THREE.Scene) => {
   directionalLight.shadow.camera.far = 50;
   scene.add(directionalLight);
 
-  const pointLight = new THREE.PointLight(0xc2a4ff, 1, 100, 3); // Debug: Force intensity to 1
+  const pointLight = new THREE.PointLight(0x00ff88, 1, 100, 3); // Debug: Force intensity to 1
   pointLight.position.set(3, 12, 4);
   pointLight.castShadow = true;
   scene.add(pointLight);

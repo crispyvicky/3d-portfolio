@@ -7,6 +7,7 @@ const WhatIDo = () => {
   const setRef = (el: HTMLDivElement | null, index: number) => {
     containerRef.current[index] = el;
   };
+
   useEffect(() => {
     if (ScrollTrigger.isTouch) {
       containerRef.current.forEach((container) => {
@@ -16,14 +17,18 @@ const WhatIDo = () => {
         }
       });
     }
+
     return () => {
       containerRef.current.forEach((container) => {
         if (container) {
-          container.removeEventListener("click", () => handleClick(container));
+          container.removeEventListener("click", () =>
+            handleClick(container)
+          );
         }
       });
     };
   }, []);
+
   return (
     <div className="whatIDO">
       <div className="what-box">
@@ -34,8 +39,10 @@ const WhatIDo = () => {
           </div>
         </h2>
       </div>
+
       <div className="what-box">
         <div className="what-box-in">
+          {/* LEFT CARD — DEVELOP */}
           <div className="what-border2">
             <svg width="100%">
               <line
@@ -58,6 +65,7 @@ const WhatIDo = () => {
               />
             </svg>
           </div>
+
           <div
             className="what-content what-noTouch"
             ref={(el) => setRef(el, 0)}
@@ -90,25 +98,30 @@ const WhatIDo = () => {
               <h3>DEVELOP</h3>
               <h4>Description</h4>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
-                quia aliquid laboriosam ducimus sit molestiae.
+                I build fast, modern and immersive digital experiences. From
+                full-stack web apps to 3D interactive websites, everything I
+                create focuses on performance, clean architecture.
               </p>
-              <h5>Skillset & tools</h5>
+
+              <h5>Skillset & Tools</h5>
               <div className="what-content-flex">
                 <div className="what-tags">JavaScript</div>
                 <div className="what-tags">TypeScript</div>
-                <div className="what-tags">Three.js</div>
                 <div className="what-tags">React</div>
-                <div className="what-tags">Css</div>
-                <div className="what-tags">Node.js</div>
                 <div className="what-tags">Next.js</div>
+                <div className="what-tags">Node.js</div>
                 <div className="what-tags">Express.js</div>
-                <div className="what-tags">PHP</div>
-                <div className="what-tags">MySql</div>
+                <div className="what-tags">Three.js</div>
+                <div className="what-tags">WebGL</div>
+                <div className="what-tags">CSS / SCSS</div>
+                <div className="what-tags">MySQL</div>
               </div>
+
               <div className="what-arrow"></div>
             </div>
           </div>
+
+          {/* RIGHT CARD — DESIGN */}
           <div
             className="what-content what-noTouch"
             ref={(el) => setRef(el, 1)}
@@ -126,25 +139,30 @@ const WhatIDo = () => {
                 />
               </svg>
             </div>
+
             <div className="what-corner"></div>
+
             <div className="what-content-in">
               <h3>DESIGN</h3>
               <h4>Description</h4>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
-                quia aliquid laboriosam ducimus sit molestiae
+                I design visuals that feel alive — combining 3D, motion and
+                modern UI to create memorable digital experiences.
               </p>
-              <h5>Skillset & tools</h5>
+
+              <h5>Skillset & Tools</h5>
               <div className="what-content-flex">
                 <div className="what-tags">Blender</div>
-                <div className="what-tags">Zbrush</div>
-                <div className="what-tags">UI Design</div>
-                <div className="what-tags">Motion</div>
-                <div className="what-tags">Rigging</div>
+                {/* <div className="what-tags">ZBrush</div> */}
                 <div className="what-tags">3D Animation</div>
-                <div className="what-tags">Character Design</div>
+                {/* <div className="what-tags">Rigging</div> */}
                 <div className="what-tags">Modelling</div>
+                <div className="what-tags">Motion Graphics</div>
+                {/* <div className="what-tags">Character Design</div> */}
+                <div className="what-tags">UI/UX Design</div>
+                <div className="what-tags">Branding</div>
               </div>
+
               <div className="what-arrow"></div>
             </div>
           </div>
@@ -159,6 +177,7 @@ export default WhatIDo;
 function handleClick(container: HTMLDivElement) {
   container.classList.toggle("what-content-active");
   container.classList.remove("what-sibling");
+
   if (container.parentElement) {
     const siblings = Array.from(container.parentElement.children);
 
