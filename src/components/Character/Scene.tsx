@@ -55,6 +55,7 @@ const Scene = () => {
 
       loadCharacter().then((gltf) => {
         if (gltf) {
+          console.log("Character loaded successfully");
           const animations = setAnimations(gltf);
           hoverDivRef.current && animations.hover(gltf, hoverDivRef.current);
           mixer = animations.mixer;
@@ -64,7 +65,9 @@ const Scene = () => {
           headBone = character.getObjectByName("spine006") || null;
           screenLight = character.getObjectByName("screenlight") || null;
           progress.loaded().then(() => {
+            console.log("Progress loaded, waiting to turn on lights");
             setTimeout(() => {
+              console.log("Calling turnOnLights");
               light.turnOnLights();
               animations.startIntro();
             }, 2500);
@@ -72,6 +75,8 @@ const Scene = () => {
           window.addEventListener("resize", () =>
             handleResize(renderer, camera, canvasDiv, character)
           );
+        } else {
+          console.error("Failed to load character GLTF");
         }
       });
 

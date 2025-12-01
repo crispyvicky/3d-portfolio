@@ -3,8 +3,8 @@ import { RGBELoader } from "three-stdlib";
 import { gsap } from "gsap";
 
 const setLighting = (scene: THREE.Scene) => {
-  const directionalLight = new THREE.DirectionalLight(0xc7a9ff, 0);
-  directionalLight.intensity = 0;
+  const directionalLight = new THREE.DirectionalLight(0xc7a9ff, 1); // Debug: Force intensity to 1
+  directionalLight.intensity = 1; // Debug: Force intensity to 1
   directionalLight.position.set(-0.47, -0.32, -1);
   directionalLight.castShadow = true;
   directionalLight.shadow.mapSize.width = 1024;
@@ -13,19 +13,27 @@ const setLighting = (scene: THREE.Scene) => {
   directionalLight.shadow.camera.far = 50;
   scene.add(directionalLight);
 
-  const pointLight = new THREE.PointLight(0xc2a4ff, 0, 100, 3);
+  const pointLight = new THREE.PointLight(0xc2a4ff, 1, 100, 3); // Debug: Force intensity to 1
   pointLight.position.set(3, 12, 4);
   pointLight.castShadow = true;
   scene.add(pointLight);
 
   new RGBELoader()
     .setPath("/models/")
-    .load("char_enviorment.hdr", function (texture) {
-      texture.mapping = THREE.EquirectangularReflectionMapping;
-      scene.environment = texture;
-      scene.environmentIntensity = 0;
-      scene.environmentRotation.set(5.76, 85.85, 1);
-    });
+    .load(
+      "char_enviorment.hdr",
+      function (texture) {
+        console.log("Environment texture loaded successfully");
+        texture.mapping = THREE.EquirectangularReflectionMapping;
+        scene.environment = texture;
+        scene.environmentIntensity = 1; // Debug: Force intensity to 1
+        scene.environmentRotation.set(5.76, 85.85, 1);
+      },
+      undefined,
+      function (error) {
+        console.error("Error loading environment texture:", error);
+      }
+    );
 
   function setPointLight(screenLight: any) {
     if (screenLight.material.opacity > 0.9) {
@@ -37,6 +45,7 @@ const setLighting = (scene: THREE.Scene) => {
   const duration = 2;
   const ease = "power2.inOut";
   function turnOnLights() {
+    console.log("turnOnLights called");
     gsap.to(scene, {
       environmentIntensity: 0.64,
       duration: duration,
