@@ -19,7 +19,9 @@ const MainContainer = ({ children }: PropsWithChildren) => {
 
   useEffect(() => {
     const resizeHandler = () => {
-      setSplitText();
+      document.fonts.ready.then(() => {
+        setSplitText();
+      });
       setIsDesktopView(window.innerWidth > 1024);
     };
     resizeHandler();
